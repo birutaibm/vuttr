@@ -1,0 +1,97 @@
+openapi: "3.0.0"
+info:
+  title: Very Useful Tools to Remember
+  description: A aplicação é um simples repositório para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.
+  version: 1.0.0
+  license:
+    name: MIT
+paths:
+  /tools:
+    get:
+      summary: List all tools with the given tag (if no tag supplied list all registered tools)
+      operationId: listTools
+      tags:
+        - tools
+      parameters:
+        - name: tag
+          in: query
+          description: What tag should be present in all listed tools
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: An array of tools
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Tools"
+    post:
+      summary: Create a tool
+      operationId: createTools
+      parameters:
+        - in: body
+          schema:
+            $ref: "#/components/schemas/NewTool"
+      tags:
+        - tools
+      responses:
+        '201':
+          description: Success creating tool
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Tool"
+        default:
+          description: unexpected error
+  /tools/:toolId:
+    delete:
+      summary: Destroy tool
+      operationId: destroyToolById
+      tags:
+        - tools
+      parameters:
+        - name: toolId
+          in: path
+          required: true
+          description: The id of the tool to destroy registry
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Expected response to a valid request
+        '404':
+          description: There is no registry of any tool with the given id
+components:
+  schemas:
+    NewTool:
+      type: object
+      required:
+        - title
+        - description
+        - link
+        - tags
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        link:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    Tool:
+      allOf:
+        - $ref: "#/components/schemas/NewTool"
+        - required:
+          - id
+          type: "object"
+          properties:
+            id:
+              type: string
+    Tools:
+      type: array
+      items:
+        $ref: "#/components/schemas/Tool"

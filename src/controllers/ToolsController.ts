@@ -24,7 +24,7 @@ export default class CustomersController {
     const { title, link, description, tags } = request.body;
     const creator = new ToolsCreator();
     const tool = await creator.create({ title, link, description, tags });
-    return response.json(tool);
+    return response.status(201).json(tool);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
