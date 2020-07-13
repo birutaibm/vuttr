@@ -1,15 +1,13 @@
 import express from 'express';
-import path from 'path';
 
 import routes from './routes';
+import DB from 'db';
 
-const docFolder = path.resolve(__dirname, '..', 'docs');
-console.log(docFolder);
+DB.connect();
 
 const app = express();
 
 app.use(express.json());
-app.use('/docs', express.static(docFolder));
 app.use(routes);
 
 export default app;

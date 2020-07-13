@@ -4,14 +4,6 @@ import ToolsRecover from '../services/ToolsRecover';
 import ToolsCreator from '../services/ToolsCreator';
 import ToolsDestroyer from '../services/ToolsDestroyer';
 
-interface Tool {
-  id: string,
-  title: string,
-  link: string,
-  description: string,
-  tags: string[]
-}
-
 export default class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const tag = request.query.tag?.toString();
