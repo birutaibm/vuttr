@@ -1,8 +1,10 @@
-import ToolsRepository from '../repository/ToolsRepository';
-import { ITool } from '../models/Tool';
+import IToolsRepository from 'repositories/IToolsRepository';
+import ITool from 'models/ITool';
 
 export default class ToolsRecover {
-  private repository = new ToolsRepository();
+  constructor(
+    private repository: IToolsRepository
+  ) {}
 
   public async recover(tag?: string): Promise<ITool[]> {
     const tools = await this.repository.getAll();

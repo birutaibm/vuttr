@@ -1,10 +1,11 @@
-import ToolsRepository from '../repository/ToolsRepository';
+import IToolsRepository from "repositories/IToolsRepository";
 
 export default class ToolsDestroyer {
-  private repository = new ToolsRepository();
+  constructor(
+    private repository: IToolsRepository
+  ) {}
 
   public async destroy(id: string): Promise<boolean> {
-    console.log('destroying id', id);
     return await this.repository.deleteId(id);
   }
 }

@@ -1,0 +1,166 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Very Useful Tools to Remember",
+    "description" : "A aplicação é um simples repositório para gerenciar ferramentas com seus respectivos nomes, links, descrições e tags.",
+    "contact" : {
+      "name" : "Rafael Arantes",
+      "email" : "birutaibm@gmail.com"
+    },
+    "license" : {
+      "name" : "MIT"
+    },
+    "version" : "1.0.1"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/tools" : {
+      "get" : {
+        "tags" : [ "tools" ],
+        "summary" : "Lista as ferramentas cadastradas",
+        "description" : "Retorna uma lista com todas as ferramentas cadastradas que contenham a tag fornecida caso ela tenha sido fornecida, ou todas as ferramentas cadastradas caso a o parâmetro tag seja omitido.",
+        "operationId" : "listTools",
+        "parameters" : [ {
+          "name" : "tag",
+          "in" : "query",
+          "description" : "A tag que deve estar presente na ferramenta.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Uma lista de ferramentas",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Tools"
+                },
+                "example" : [ {
+                  "id" : 1,
+                  "title" : "Notion",
+                  "link" : "https://notion.so",
+                  "description" : "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+                  "tags" : [ "organization", "planning", "collaboration", "writing", "calendar" ]
+                }, {
+                  "id" : 2,
+                  "title" : "json-server",
+                  "link" : "https://github.com/typicode/json-server",
+                  "description" : "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+                  "tags" : [ "api", "json", "schema", "node", "github", "rest" ]
+                }, {
+                  "id" : 3,
+                  "title" : "fastify",
+                  "link" : "https://www.fastify.io/",
+                  "description" : "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+                  "tags" : [ "web", "framework", "node", "http2", "https", "localhost" ]
+                } ]
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "tools" ],
+        "summary" : "Cadastra uma nova ferramenta",
+        "description" : "Cadastra uma ferramenta com os dados fornecidos e um id gerado automaticamente",
+        "operationId" : "createTools",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NewTool"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Ferramenta criada com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Tool"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "tools" ],
+        "summary" : "Elimina uma ferramenta",
+        "description" : "Remove o cadastro da ferramenta cujo id foi fornecido do banco de dados",
+        "operationId" : "destroyToolById",
+        "parameters" : [ {
+          "name" : "toolId",
+          "in" : "path",
+          "description" : "O id da ferramenta a ser removida",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Ferramenta removida com sucesso"
+          },
+          "404" : {
+            "description" : "Não foi encontrada nenhuma ferramenta com o id fornecido. Ela pode já ter sido removida ou pode haver um erro id fornecido."
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "NewTool" : {
+        "required" : [ "description", "link", "tags", "title" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "link" : {
+            "type" : "string"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "Tool" : {
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/NewTool"
+        }, {
+          "required" : [ "id" ],
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "type" : "string"
+            }
+          }
+        } ]
+      },
+      "Tools" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Tool"
+        }
+      }
+    }
+  }
+}

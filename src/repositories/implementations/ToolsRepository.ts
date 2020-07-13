@@ -1,6 +1,8 @@
-import MongoTool, { ITool, extractInfo } from '../models/Tool';
+import ITool from '../../models/ITool';
+import MongoTool, { extractInfo } from '../../models/implementations/Tool';
+import IToolsRepository from '../IToolsRepository';
 
-export default class ToolsRepository {
+export default class ToolsRepository implements IToolsRepository {
   public async getAll(): Promise<ITool[]> {
     const mongoTools = await MongoTool.find();
     return mongoTools

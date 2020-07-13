@@ -1,12 +1,5 @@
 import mongoose from 'mongoose';
-
-export interface ITool {
-  id: string,
-  title: string,
-  link: string,
-  description: string,
-  tags: string[]
-}
+import ITool from '../ITool';
 
 const ToolSchema = new mongoose.Schema({
   title: String,
