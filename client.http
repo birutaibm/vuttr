@@ -1,0 +1,14 @@
+### Pega a lista de usuários cadastrados
+http://localhost:3000/users
+
+### Cadatra um usuário
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+    "email": "birutaibm@gmail.com",
+    "password": "123456"
+}
+
+### Pega a lista de ferramentas cadastradas
+http://localhost:3000/tools

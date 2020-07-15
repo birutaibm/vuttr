@@ -1,15 +1,11 @@
-import ToolsRepository from '../implementations/ToolsRepository';
-import FakeToolsRepository from '../mocks/FakeToolsRepository';
-import IToolsRepository from '../IToolsRepository';
+import IToolsRepositoryProvider from './IToolsRepositoryProvider';
+import IUsersRepositoryProvider from './IUsersRepositoryProvider';
 
-interface IProvider<T> {
+export interface IProvider<T> {
   implementation: T;
   mock: T;
 }
 
-const IToolsRepositoryProvider: IProvider<IToolsRepository> = {
-  implementation: new ToolsRepository(),
-  mock: new FakeToolsRepository(),
-};
+export const IToolsRepository = IToolsRepositoryProvider;
 
-export default IToolsRepositoryProvider;
+export const IUsersRepository = IUsersRepositoryProvider;

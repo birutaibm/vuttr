@@ -1,6 +1,6 @@
 import ToolsCreator from './ToolsCreator';
 import IToolsRepository from '../repositories/IToolsRepository';
-import IToolsRepositoryProvider from '../repositories/provider';
+import { IToolsRepository as IToolsRepositoryProvider } from '../repositories/provider';
 import ToolsDestroyer from './ToolsDestroyer';
 
 const hotel = {

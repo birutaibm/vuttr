@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 
-import IToolsRepositoryProvider from '../repositories/provider';
+import { IToolsRepository } from '../repositories/provider';
 import ToolsRecover from '../services/ToolsRecover';
 import ToolsCreator from '../services/ToolsCreator';
 import ToolsDestroyer from '../services/ToolsDestroyer';
 
-const toolsRepository = IToolsRepositoryProvider.implementation;
+const toolsRepository = IToolsRepository.implementation;
 
 export default class ToolsController {
   public async index(request: Request, response: Response): Promise<Response> {
