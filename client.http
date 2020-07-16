@@ -6,9 +6,34 @@ POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
 
 {
-    "email": "birutaibm@gmail.com",
-    "password": "123456"
+  "email": "birutaibm@gmail.com",
+  "password": "123456"
+}
+
+### Inicia uma nova seção (login)
+POST http://localhost:3000/sessions HTTP/1.1
+content-type: application/json
+
+{
+  "email": "birutaibm@gmail.com",
+  "password": "123456"
 }
 
 ### Pega a lista de ferramentas cadastradas
 http://localhost:3000/tools
+
+### Cadastra uma nova ferramenta
+POST http://localhost:3000/tools HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTQ5MTA2MTYsImV4cCI6MTU5NDkxNDIxNiwic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.7Hruo599pK7ET80g-u9oCD3AtSxNeNbajaNaFddbMhc
+
+{
+  "title": "hotel",
+  "link": "https://github.com/typicode/hotel",
+  "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box.",
+  "tags":["node", "organizing", "webapps", "domain", "developer", "https", "proxy"]
+}
+
+###
+DELETE http://localhost:3000/tools/5f106a0ab15505295cf05867 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTQ5MTA2MTYsImV4cCI6MTU5NDkxNDIxNiwic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.7Hruo599pK7ET80g-u9oCD3AtSxNeNbajaNaFddbMhc
