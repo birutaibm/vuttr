@@ -1,6 +1,6 @@
 import ToolsCreator from './ToolsCreator';
 import IToolsRepository from '../repositories/IToolsRepository';
-import { IToolsRepository as IToolsRepositoryProvider } from '../repositories/provider';
+import IToolsRepositoryProvider from '../repositories/provider/IToolsRepositoryProvider';
 
 const hotel = {
   title: "hotel",

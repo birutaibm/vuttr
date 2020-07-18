@@ -1,33 +1,15 @@
-import express, { Router } from 'express';
-import path from 'path';
+import { Router } from 'express';
 
-import ToolsController from '../controllers/ToolsController';
-import UsersController from '../controllers/UsersController';
-import ensureAuthenticated from 'middlewares/ensureAuthenticated';
-import SessionsController from '../controllers/SessionsController';
+import toolsRouter from './tools.routes';
+import usersRouter from './users.routes';
+import sessionsRouter from './sessions.routes';
+import docsRouter from './docs.routes';
 
 const routes = Router();
 
-// Tools
-const toolsController = new ToolsController();
-
-routes.get('/tools', toolsController.index);
-routes.post('/tools', ensureAuthenticated, toolsController.create);
-routes.delete('/tools/:id', ensureAuthenticated, toolsController.delete);
-
-// Users
-const usersController = new UsersController();
-
-routes.get('/users', usersController.index);
-routes.post('/users', usersController.create);
-
-// Sections
-const sessionsController = new SessionsController();
-
-routes.post('/sections', sessionsController.create);
-
-// Documentation
-const docFolder = path.resolve(__dirname, '..', '..', 'docs');
-routes.use('/docs', express.static(docFolder));
+routes.use(toolsRouter);
+routes.use(usersRouter);
+routes.use(sessionsRouter);
+routes.use(docsRouter);
 
 export default routes;

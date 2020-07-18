@@ -25,7 +25,7 @@ http://localhost:3000/tools
 ### Cadastra uma nova ferramenta
 POST http://localhost:3000/tools HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTQ5MTA2MTYsImV4cCI6MTU5NDkxNDIxNiwic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.7Hruo599pK7ET80g-u9oCD3AtSxNeNbajaNaFddbMhc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUxMTUyNzMsImV4cCI6MTU5NTExODg3Mywic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.P0Or5phYdlNdtGSCwRfgU85jPCOLhezUTOPxOHHwfPI
 
 {
   "title": "hotel",
@@ -35,5 +35,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTQ5MTA2M
 }
 
 ###
-DELETE http://localhost:3000/tools/5f106a0ab15505295cf05867 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTQ5MTA2MTYsImV4cCI6MTU5NDkxNDIxNiwic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.7Hruo599pK7ET80g-u9oCD3AtSxNeNbajaNaFddbMhc
+DELETE http://localhost:3000/tools/5f137ba781df261edf8098d2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTUxMTUyNzMsImV4cCI6MTU5NTExODg3Mywic3ViIjoiYmlydXRhaWJtQGdtYWlsLmNvbSJ9.P0Or5phYdlNdtGSCwRfgU85jPCOLhezUTOPxOHHwfPI

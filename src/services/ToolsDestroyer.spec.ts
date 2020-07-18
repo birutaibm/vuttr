@@ -1,7 +1,7 @@
+import AppError from '../errors/AppError';
 import IToolsRepository from '../repositories/IToolsRepository';
-import { IToolsRepository as IToolsRepositoryProvider } from '../repositories/provider';
+import IToolsRepositoryProvider from '../repositories/provider/IToolsRepositoryProvider';
 import ToolsDestroyer from './ToolsDestroyer';
-import AppError from 'errors/AppError';
 
 const hotel = {
   title: "hotel",
@@ -21,8 +21,9 @@ describe('Tools Destroyer', () => {
 
   it('should be able to remove tool from the repository', async () => {
     const { id } = await repository.save(hotel);
-    const removed = await service.destroy(id);
-    expect(removed).toBe(true);
+    await service.destroy(id);
+    const found = await repository.findById(id);
+    expect(found).toBeUndefined();
   });
 
   it('should not be able to remove non-existing tool', async () => {
@@ -33,8 +34,9 @@ describe('Tools Destroyer', () => {
 
   it('should not remove any tool with different id', async () => {
     const { id } = await repository.save(hotel);
-    const removed = await service.destroy(`id different of ${id}`);
-    expect(removed).toBe(false);
+    await expect(
+      service.destroy(`id different of ${id}`)
+    ).rejects.toBeInstanceOf(AppError);
     const found = await repository.findById(id);
     expect(found).toEqual(
       expect.objectContaining(hotel)

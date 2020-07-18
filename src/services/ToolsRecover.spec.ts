@@ -1,6 +1,6 @@
 import ToolsRecover from './ToolsRecover';
 import IToolsRepository from '../repositories/IToolsRepository';
-import { IToolsRepository as IToolsRepositoryProvider } from '../repositories/provider';
+import IToolsRepositoryProvider from '../repositories/provider/IToolsRepositoryProvider';
 
 const notion = {
   title: "Notion",
