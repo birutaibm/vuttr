@@ -25,7 +25,7 @@ export default class ToolsController {
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const destroyer = new ToolsDestroyer(toolsRepository);
-    const success = await destroyer.destroy(id);
-    return success ? response.sendStatus(204) : response.sendStatus(404);
+    await destroyer.destroy(id);
+    return response.sendStatus(204);
   }
 }

@@ -1,6 +1,7 @@
 import IUsersRepository from 'repositories/IUsersRepository';
 import IUser from 'models/IUser';
 import passwordManipulator from 'utils/password';
+import AppError from '../errors/AppError';
 
 interface IUserCreationDTO {
   email: string;
@@ -16,7 +17,7 @@ export default class UsersCreator {
     const conflictingUser = await this.repository.findByEmail(email);
 
     if (conflictingUser) {
-      throw new Error('Email address already used.');
+      throw new AppError('Email address already used.');
     }
 
     const hash_password = await passwordManipulator.encrypt(password);
