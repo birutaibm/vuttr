@@ -46,7 +46,7 @@ let service: ToolsRecover;
 
 describe('Tools Recover', () => {
   beforeEach(() => {
-    repository = IToolsRepositoryProvider.mock;
+    repository = IToolsRepositoryProvider.mock();
     service = new ToolsRecover(repository);
   });
 

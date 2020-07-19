@@ -15,7 +15,7 @@ let service: ToolsDestroyer;
 
 describe('Tools Destroyer', () => {
   beforeEach(() => {
-    repository = IToolsRepositoryProvider.mock;
+    repository = IToolsRepositoryProvider.mock();
     service = new ToolsDestroyer(repository);
   });
 

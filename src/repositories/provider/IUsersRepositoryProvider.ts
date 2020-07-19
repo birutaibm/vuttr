@@ -6,7 +6,7 @@ import { IProvider } from '.';
 
 const IUsersRepositoryProvider: IProvider<IUsersRepository> = {
   implementation: new UsersRepository(),
-  mock: new FakeUsersRepository(),
+  mock: () => new FakeUsersRepository(),
 };
 
 export default IUsersRepositoryProvider;

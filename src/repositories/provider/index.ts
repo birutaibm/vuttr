@@ -3,7 +3,7 @@ import IUsersRepositoryProvider from './IUsersRepositoryProvider';
 
 export interface IProvider<T> {
   implementation: T;
-  mock: T;
+  mock: () => T;
 }
 
 export const IToolsRepository = IToolsRepositoryProvider;

@@ -14,7 +14,7 @@ let service: ToolsCreator;
 
 describe('Tools Creator', () => {
   beforeEach(() => {
-    repository = IToolsRepositoryProvider.mock;
+    repository = IToolsRepositoryProvider.mock();
     service = new ToolsCreator(repository);
   });
 

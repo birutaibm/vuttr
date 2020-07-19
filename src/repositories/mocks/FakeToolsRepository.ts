@@ -1,30 +1,34 @@
 import IToolsRepository from "../IToolsRepository";
 import ITool from "models/ITool";
 
-const tools: ITool[] = [];
-
 export default class FakeToolsRepository implements IToolsRepository {
+  private tools: ITool[];
+
+  constructor() {
+    this.tools = [];
+  }
+
   public async getAll(): Promise<ITool[]> {
-    return [ ...tools ];
+    return [ ...this.tools ];
   }
 
   public async save(tool: Omit<ITool, 'id'>): Promise<ITool> {
-    const lastIndex = tools.length - 1;
-    const lastId = tools[lastIndex] ? Number(tools[lastIndex].id) : 0;
+    const lastIndex = this.tools.length - 1;
+    const lastId = this.tools[lastIndex] ? Number(this.tools[lastIndex].id) : 0;
     const id = (lastId + 1).toString();
     const newTool = { ...tool, id };
-    tools.push(newTool);
+    this.tools.push(newTool);
     return newTool;
   }
 
   public async findById(id: string): Promise<ITool | undefined> {
-    return tools.find(tool => tool.id === id);
+    return this.tools.find(tool => tool.id === id);
   }
 
   public async deleteId(id: string): Promise<boolean> {
-    const index = tools.findIndex(tool => tool.id === id);
+    const index = this.tools.findIndex(tool => tool.id === id);
     if (index !== -1) {
-      tools.splice(index, 1);
+      this.tools.splice(index, 1);
       return true;
     }
     return false;

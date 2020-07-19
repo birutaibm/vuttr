@@ -6,7 +6,7 @@ import { IProvider } from '.';
 
 const IToolsRepositoryProvider: IProvider<IToolsRepository> = {
   implementation: new ToolsRepository(),
-  mock: new FakeToolsRepository(),
+  mock: () => new FakeToolsRepository(),
 };
 
 export default IToolsRepositoryProvider;

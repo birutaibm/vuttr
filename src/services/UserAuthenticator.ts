@@ -1,8 +1,8 @@
-import IUsersRepository from 'repositories/IUsersRepository';
-import passwordManipulator from 'utils/password';
 import { sign } from 'jsonwebtoken';
 
-import authConfig from 'config/auth';
+import IUsersRepository from 'repositories/IUsersRepository';
+import passwordManipulator from '../utils/password';
+import authConfig from '../config/auth';
 import AppError from '../errors/AppError';
 
 interface UserAuthenticatorDTO {
@@ -20,7 +20,8 @@ export default class UserAuthenticator {
     if (!user) {
       throw new AppError('Invalid credentials', 401);
     }
-    if (!passwordManipulator.match(password, user.hash_password)) {
+    const passwordMatch = await passwordManipulator.match(password, user.hash_password);
+    if (!passwordMatch) {
       throw new AppError('Invalid credentials', 401);
     }
     const { secret, expiresIn } = authConfig.jwt;

@@ -1,6 +1,6 @@
 import IUsersRepository from 'repositories/IUsersRepository';
-import MongoUser, { extractInfo } from 'models/implementations/User';
-import IUser from 'models/IUser';
+import MongoUser, { extractInfo } from '../../models/implementations/User';
+import IUser from '../../models/IUser';
 
 export default class UsersRepository implements IUsersRepository {
   public async getAll() {
