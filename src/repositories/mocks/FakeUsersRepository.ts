@@ -1,5 +1,5 @@
-import IUsersRepository from "repositories/IUsersRepository";
-import IUser from "models/IUser";
+import IUsersRepository from '../IUsersRepository';
+import IUser from '../../models/IUser';
 
 export default class FakeUsersRepository implements IUsersRepository {
   private users: IUser[];

@@ -1,4 +1,4 @@
-import IToolsRepository from 'repositories/IToolsRepository';
+import IToolsRepository from '../repositories/IToolsRepository';
 import AppError from '../errors/AppError';
 
 export default class ToolsDestroyer {

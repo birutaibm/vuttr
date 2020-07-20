@@ -1,5 +1,5 @@
-import IUsersRepository from 'repositories/IUsersRepository';
-import IUser from 'models/IUser';
+import IUsersRepository from '../repositories/IUsersRepository';
+import IUser from '../models/IUser';
 import passwordManipulator from '../utils/password';
 import AppError from '../errors/AppError';
 

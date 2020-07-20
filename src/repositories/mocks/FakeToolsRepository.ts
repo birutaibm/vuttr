@@ -1,5 +1,5 @@
-import IToolsRepository from "../IToolsRepository";
-import ITool from "models/ITool";
+import IToolsRepository from '../IToolsRepository';
+import ITool from '../../models/ITool';
 
 export default class FakeToolsRepository implements IToolsRepository {
   private tools: ITool[];

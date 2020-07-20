@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import UserAuthenticator from 'services/UserAuthenticator';
-import { IUsersRepository } from 'repositories/provider';
+import UserAuthenticator from '../services/UserAuthenticator';
+import { IUsersRepository } from '../repositories/provider';
 
 const authenticator = new UserAuthenticator(IUsersRepository.implementation);
 

@@ -1,6 +1,6 @@
 import { sign } from 'jsonwebtoken';
 
-import IUsersRepository from 'repositories/IUsersRepository';
+import IUsersRepository from '../repositories/IUsersRepository';
 import passwordManipulator from '../utils/password';
 import authConfig from '../config/auth';
 import AppError from '../errors/AppError';

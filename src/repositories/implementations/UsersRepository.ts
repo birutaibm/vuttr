@@ -1,4 +1,4 @@
-import IUsersRepository from 'repositories/IUsersRepository';
+import IUsersRepository from '../IUsersRepository';
 import MongoUser, { extractInfo } from '../../models/implementations/User';
 import IUser from '../../models/IUser';
 

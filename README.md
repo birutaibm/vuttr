@@ -27,6 +27,10 @@ Outras ferramentas utilizadas incluem:
   - acesse as rotas a partir de http://localhost:3000/
     - você pode ver mais sobre as rotas acessando http://localhost:3000/docs
 
+## Acessando a versão on-line
+
+O aplicativo pode ser acessado por requisições HTTP tendo com url base https://vuttr-rarantes.herokuapp.com/ porém nessa versão não será permitido o cadastro de novos usuário.
+
 ## Arquitetura empregada
 
 Por se tratar de um aplicativo pequeno, ele não foi divido em módulos. Sua organização atual, a partir do diretório raiz é a seguinte:

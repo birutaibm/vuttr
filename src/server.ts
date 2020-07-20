@@ -1,5 +1,13 @@
+import dotenv from 'dotenv';
+
 import app from './app';
 
-app.listen(3000, () => {
+dotenv.config({
+  path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
+});
+
+const port = Number(process.env.PORT);
+
+app.listen(port, () => {
   console.log('Server started on port 3000');
 });

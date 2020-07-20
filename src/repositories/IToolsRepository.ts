@@ -1,4 +1,4 @@
-import ITool from 'models/ITool';
+import ITool from '../models/ITool';
 
 export default interface IToolsRepository {
   getAll: () => Promise<ITool[]>;

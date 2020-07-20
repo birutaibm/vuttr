@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from 'middlewares/ensureAuthenticated';
-import { deleteTool, createTool, listTools } from 'validators';
-import ToolsController from 'controllers/ToolsController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import { deleteTool, createTool, listTools } from '../validators';
+import ToolsController from '../controllers/ToolsController';
 
 const routes = Router();
 
