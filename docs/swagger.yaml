@@ -10,8 +10,78 @@ info:
     name: MIT
   version: 1.0.1
 servers:
-- url: /
+- url: https://vuttr-rarantes.herokuapp.com
 paths:
+  /sessions:
+    post:
+      tags:
+        - users
+      summary: Realiza o login.
+      description: Inicia uma nova sessão da aplicação, ou seja, realiza o login.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credential'
+      responses:
+        '201':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+                    description: O e-mail do usuário logado
+                  token:
+                    type: string
+                    description: O token JWT gerado pelo login
+  /users:
+    get:
+      tags:
+        - users
+      summary: Lista usuários.
+      description: Lista os usuários cadastrados no sistema.
+      responses:
+        '200':
+          description: Lista dos usuários.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+    post:
+      tags:
+        - users
+      summary: Cadastra usuário.
+      description: Cadastra um novo usuário.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credential'
+      responses:
+        '201':
+          description: Usuário cadastrado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  hash_password:
+                    type: string
+        '401':
+          description: Permissão negada. Você não tem permissão para criar usuário nessa versão do sistema.
+
   /tools:
     get:
       tags:
@@ -80,6 +150,8 @@ paths:
       description: Cadastra uma ferramenta com os dados fornecidos e um id gerado
         automaticamente
       operationId: createTools
+      security:
+        - bearerAuth: []
       requestBody:
         content:
           application/json:
@@ -92,6 +164,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tool'
+        "401":
+          description: Permissão negada. Você precisa possuir um token JWT válido para realizar esta operação.
+  /tools/{toolId}:
     delete:
       tags:
       - tools
@@ -99,6 +174,8 @@ paths:
       description: Remove o cadastro da ferramenta cujo id foi fornecido do banco
         de dados
       operationId: destroyToolById
+      security:
+        - bearerAuth: []
       parameters:
       - name: toolId
         in: path
@@ -111,11 +188,29 @@ paths:
       responses:
         "204":
           description: Ferramenta removida com sucesso
+        "401":
+          description: Permissão negada. Você precisa possuir um token JWT válido para realizar esta operação.
         "404":
           description: Não foi encontrada nenhuma ferramenta com o id fornecido. Ela
             pode já ter sido removida ou pode haver um erro id fornecido.
+
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
+    Credential:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
     NewTool:
       required:
       - description
@@ -147,3 +242,5 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Tool'
+security:
+  - bearerAuth: []

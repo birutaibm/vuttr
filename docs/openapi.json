@@ -13,9 +13,91 @@
     "version" : "1.0.1"
   },
   "servers" : [ {
-    "url" : "/"
+    "url" : "https://vuttr-rarantes.herokuapp.com"
+  } ],
+  "security" : [ {
+    "bearerAuth" : [ ]
   } ],
   "paths" : {
+    "/sessions" : {
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Realiza o login.",
+        "description" : "Inicia uma nova sessão da aplicação, ou seja, realiza o login.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Credential"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Login realizado com sucesso",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "tags" : [ "users" ],
+        "summary" : "Lista usuários.",
+        "description" : "Lista os usuários cadastrados no sistema.",
+        "responses" : {
+          "200" : {
+            "description" : "Lista dos usuários.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "users" ],
+        "summary" : "Cadastra usuário.",
+        "description" : "Cadastra um novo usuário.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Credential"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Usuário cadastrado com sucesso.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Permissão negada. Você não tem permissão para criar usuário nessa versão do sistema."
+          }
+        }
+      }
+    },
     "/tools" : {
       "get" : {
         "tags" : [ "tools" ],
@@ -89,9 +171,17 @@
                 }
               }
             }
+          },
+          "401" : {
+            "description" : "Permissão negada. Você precisa possuir um token JWT válido para realizar esta operação."
           }
-        }
-      },
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
+      }
+    },
+    "/tools/{toolId}" : {
       "delete" : {
         "tags" : [ "tools" ],
         "summary" : "Elimina uma ferramenta",
@@ -112,15 +202,33 @@
           "204" : {
             "description" : "Ferramenta removida com sucesso"
           },
+          "401" : {
+            "description" : "Permissão negada. Você precisa possuir um token JWT válido para realizar esta operação."
+          },
           "404" : {
             "description" : "Não foi encontrada nenhuma ferramenta com o id fornecido. Ela pode já ter sido removida ou pode haver um erro id fornecido."
           }
-        }
+        },
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ]
       }
     }
   },
   "components" : {
     "schemas" : {
+      "Credential" : {
+        "required" : [ "email", "password" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
       "NewTool" : {
         "required" : [ "description", "link", "tags", "title" ],
         "type" : "object",
@@ -160,6 +268,48 @@
         "items" : {
           "$ref" : "#/components/schemas/Tool"
         }
+      },
+      "inline_response_201" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "type" : "string",
+            "description" : "O e-mail do usuário logado"
+          },
+          "token" : {
+            "type" : "string",
+            "description" : "O token JWT gerado pelo login"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_201_1" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "hash_password" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
       }
     }
   }
