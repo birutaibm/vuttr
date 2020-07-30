@@ -13,7 +13,7 @@ export const listTools = celebrate({
 export const createTool = celebrate({
   [Segments.BODY]: {
     title: Joi.string().required(),
-    link: Joi.string().uri().required(),
+    link: Joi.string().uri().optional(),
     description: Joi.string().required(),
     tags: Joi.array().items(Joi.string()),
   }

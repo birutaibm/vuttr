@@ -13,13 +13,17 @@ type DocumentTool = ITool & mongoose.Document;
 
 export function extractInfo(registry: DocumentTool | null) : ITool | undefined {
   if (registry) {
-    return {
+    const normalized = {
       id: registry._id,
       description: registry.description,
       title: registry.title,
       link: registry.link,
       tags: registry.tags,
     };
+    if (registry.link === undefined) {
+      delete normalized.link;
+    }
+    return normalized;
   }
   return undefined;
 }

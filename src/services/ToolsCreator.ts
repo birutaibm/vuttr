@@ -7,6 +7,9 @@ export default class ToolsCreator {
   ) {}
 
   public async create(data: Omit<ITool, 'id'>): Promise<ITool> {
+    if (data.link === undefined) {
+      delete data.link;
+    }
     return await this.repository.save(data);
   }
 }
